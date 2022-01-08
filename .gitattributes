@@ -1,0 +1,37 @@
+### let git know what the file types are, for transparent line endings etc;
+### see http://git-scm.com/docs/gitattributes
+
+### fallback (later patterns override per attribute):
+# - identifying text/binary automatically
+# - text is CRLF->LF on checkin and uses core.eol setting on checkout (default: native)
+* text=auto !eol
+
+# some things that should always check out with a fixed eol
+*.awk text eol=lf
+*.sh text eol=lf
+*.mk text eol=lf
+[Mm]akefile text eol=lf
+*.[Bb][Aa][Tt] text eol=crlf
+*.[Cc][Mm][Dd] text eol=crlf
+*.[Pp][Ss]1 text eol=crlf
+
+### anything else (rarely needed!)
+# - explicitly label file types binary or text (heuristics typically fine)
+#   - to minimize corruption risk
+#   - to avoid looking into files to find out if binary
+# - to disable delta compression, diffing, merging, or set a filter
+# - built-in "binary" macro attribute => -text -diff -merge
+
+# # set a specific diff helper
+# *.cs text !eol diff=cs
+# # xml, but treat as binary blob (large, mostly due to hexstring-encoded attributes)
+# *.calibration binary -delta
+# # data in text form, but do not mess w/ eols
+# *.mol -text
+
+# # just for explicitness
+# *.css text !eol
+# *.js text !eol
+# *.sql text !eol
+# *.csproj text !eol
+# *.sln text !eol

@@ -1,0 +1,37 @@
+### ignore these files (unless part of index already)
+### shared via repo
+
+### see http://git-scm.com/docs/gitignore
+
+# entire directories (for speed, cannot re-include contents below!)
+
+# these directories never matter
+bin/
+obj/
+output/
+packages/
+.vs/
+TestResults/
+
+# VS performance tool
+*.psess
+*.vsp
+
+# always ignore these files
+*.sqlproj.user
+*.csproj.user
+*.suo
+*.orig
+*.dgml
+
+*.[ml]df
+
+# DELIBERATELY BREAK COMMITTING BINARIES
+*.dll
+*.exe
+*.msi
+*.zip
+*.pdf
+
+# for now, we have no shared test playlists
+*.playlist
