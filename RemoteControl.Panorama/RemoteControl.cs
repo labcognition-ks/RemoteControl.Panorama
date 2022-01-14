@@ -3,7 +3,7 @@ using LC.Communicator;
 using LC.Communicator.ByFile;
 using LC.Communicator.ByFile.Structures;
 
-namespace RemoteControl.ReactionMonitoring
+namespace RemoteControl.Panorama
 {
     class RemoteControl
     {

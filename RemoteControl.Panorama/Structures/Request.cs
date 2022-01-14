@@ -1,6 +1,6 @@
 using LC.Communicator;
 
-namespace RemoteControl.ReactionMonitoring.Structures
+namespace RemoteControl.Panorama.Structures
 {
     class Request : IRequest
     {

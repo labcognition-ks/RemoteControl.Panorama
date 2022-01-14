@@ -1,7 +1,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace RemoteControl.ReactionMonitoring
+namespace RemoteControl.Panorama
 {
     static class Program
     {

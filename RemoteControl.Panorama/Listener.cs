@@ -4,7 +4,7 @@ using LC.Communicator;
 using LC.Communicator.ByFile;
 using LC.Communicator.ByFile.Structures;
 
-namespace RemoteControl.ReactionMonitoring
+namespace RemoteControl.Panorama
 {
     /// <summary>
     /// This class implements and auxillary channel listener which is permanently listening
@@ -16,7 +16,7 @@ namespace RemoteControl.ReactionMonitoring
     /// </remarks>
     public class Listener
     {
-        private Receiver<IResponse<dynamic[]>>? receiver;
+        private Receiver<Response<Content[]>>? receiver;
         private Action<string?, string?>? AddLogHandler;
 
         public Listener(string commandDirectory, int timeout_ms, Action<string?, string?> AddLogHandler)
@@ -35,13 +35,19 @@ namespace RemoteControl.ReactionMonitoring
 
         public void Start()
         {
-            this.receiver = new Receiver<IResponse<dynamic[]>> {
+            this.receiver = new Receiver<Response<Content[]>> {
                 DeleteFileAfterInterpretation = DeleteFileAfterInterpretation,
                 ReceiverParameter = this.ReceiverParameter
             };
 
             this.receiver.Start();
             this.receiver.OnFileCreated += this.Receiver_OnFileCreated;
+        }
+
+        public void Stop()
+        {
+            this.receiver?.Stop();
+            this.receiver = null;
         }
 
         private void Receiver_OnFileCreated(object sender, FileSystemEventArgs e)
@@ -52,16 +58,22 @@ namespace RemoteControl.ReactionMonitoring
                 return;
             }
 
-            AddLog(response.MessageType, response.Message);
+            var message = response.Message ?? "Success";
+            AddLog(response.MessageType, $"Reading file '{e.FullPath}' - {message}");
             // unwrap results
             if (response.Result == null) {
                 this.AddLog(response.MessageType, $"No result");
                 return;
             }
 
+            int i = 0;
+            message = "\r\n";
             foreach (var item in response.Result) {
-                this.AddLog(item.Name, $"{item.Value} ({item.ValueType})");
+                message += $"Content[{i}]: {item.Name}: {item.Value} ({item.ValueType})\r\n";
+                i++;
             }
+
+            this.AddLog("", message);
         }
 
         private void AddLog(string? messageType, string? message)

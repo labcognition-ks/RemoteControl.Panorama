@@ -1,4 +1,4 @@
-namespace RemoteControl.ReactionMonitoring.Structures
+namespace RemoteControl.Panorama.Structures
 {
     /// <summary>
     /// wrapper to carry the reaction config file path

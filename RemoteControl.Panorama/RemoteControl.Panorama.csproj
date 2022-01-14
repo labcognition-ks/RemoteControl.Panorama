@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net48</TargetFramework>
+        <ApplicationIcon />
+        <StartupObject />
+        <Nullable>enable</Nullable>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Res\Pause.png" />
+      <None Remove="Res\Resume.png" />
+      <None Remove="Res\Start.png" />
+      <None Remove="Res\Stop.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="LC.Communicator.ByFile" Version="0.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="System.Windows" />
+      <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Res\Pause.png" />
+      <Resource Include="Res\Resume.png" />
+      <Resource Include="Res\Start.png" />
+      <Resource Include="Res\Stop.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Properties\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Properties\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+</Project>

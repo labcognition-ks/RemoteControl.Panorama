@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RemoteControl.ReactionMonitoring.Structures;
+using LC.Communicator.ByFile;
+using RemoteControl.Panorama.Structures;
 
-namespace RemoteControl.ReactionMonitoring
+namespace RemoteControl.Panorama
 {
     public partial class MainForm : Form
     {
@@ -160,10 +161,12 @@ namespace RemoteControl.ReactionMonitoring
             if (this.auxListener == null &&
                 enabled) {
                 this.auxListener = new Listener(this.textBoxAuxDir.Text, Convert.ToInt32(this.numericUpDownTimeout.Value), this.AddAuxLog);
+                this.auxListener.Start();
             }
 
             enabled = enabled ? this.CleanupDirectory(this.textBoxAuxDir.Text, this.textBoxAuxLog) : enabled;
             if (!enabled) {
+                this.auxListener?.Stop();
                 this.auxListener = null;
             }
 
@@ -208,7 +211,7 @@ namespace RemoteControl.ReactionMonitoring
 
         private void AddLog(string? messageType, string? message, TextBox log)
         {
-            var line = string.Format("{0} {1,-12}: {2}\r\n", DateTime.Now.ToString(), messageType == null ? "Error" : messageType, message == null ? "Success" : message);
+            var line = string.Format("{0} {1,-12}: {2}\r\n", DateTime.Now.ToString(), messageType ?? Sender.MsgError, message ?? "Success");
             log.Text += line;
         }
 

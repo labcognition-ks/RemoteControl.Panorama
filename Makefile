@@ -3,7 +3,7 @@ meta.wrap := ms
 include ../common_0.4.1.mk
 
 v.files := Directory.Build.props
-ms.solution := RemoteControl.ReactionMonitoring.sln
+ms.solution := RemoteControl.Panorama.sln
 
 release.target := _release
 .PHONY: _release

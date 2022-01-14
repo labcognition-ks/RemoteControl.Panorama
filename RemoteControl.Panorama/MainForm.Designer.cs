@@ -1,5 +1,5 @@
 
-namespace RemoteControl.ReactionMonitoring
+namespace RemoteControl.Panorama
 {
     partial class MainForm
     {
@@ -29,6 +29,7 @@ namespace RemoteControl.ReactionMonitoring
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.labelCmdDir = new System.Windows.Forms.Label();
             this.labelResponseDir = new System.Windows.Forms.Label();
             this.textBoxCmdDir = new System.Windows.Forms.TextBox();
@@ -36,10 +37,7 @@ namespace RemoteControl.ReactionMonitoring
             this.buttonGetReactions = new System.Windows.Forms.Button();
             this.labelReactions = new System.Windows.Forms.Label();
             this.comboBoxReaction = new System.Windows.Forms.ComboBox();
-            this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonPause = new System.Windows.Forms.Button();
-            this.buttonResume = new System.Windows.Forms.Button();
             this.textBoxResponseLog = new System.Windows.Forms.TextBox();
             this.labelResponse = new System.Windows.Forms.Label();
             this.labelTimeout = new System.Windows.Forms.Label();
@@ -54,6 +52,9 @@ namespace RemoteControl.ReactionMonitoring
             this.labelAuxDir = new System.Windows.Forms.Label();
             this.labelAuxChannel = new System.Windows.Forms.Label();
             this.textBoxAuxLog = new System.Windows.Forms.TextBox();
+            this.buttonResume = new System.Windows.Forms.Button();
+            this.buttonPause = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCommandTimeout)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +83,7 @@ namespace RemoteControl.ReactionMonitoring
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCmdDir.Location = new System.Drawing.Point(16, 29);
             this.textBoxCmdDir.Name = "textBoxCmdDir";
-            this.textBoxCmdDir.Size = new System.Drawing.Size(356, 20);
+            this.textBoxCmdDir.Size = new System.Drawing.Size(469, 20);
             this.textBoxCmdDir.TabIndex = 0;
             this.textBoxCmdDir.TextChanged += new System.EventHandler(this.textBoxCmdDir_TextChanged);
             // 
@@ -92,7 +93,7 @@ namespace RemoteControl.ReactionMonitoring
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxResponseDir.Location = new System.Drawing.Point(16, 70);
             this.textBoxResponseDir.Name = "textBoxResponseDir";
-            this.textBoxResponseDir.Size = new System.Drawing.Size(355, 20);
+            this.textBoxResponseDir.Size = new System.Drawing.Size(469, 20);
             this.textBoxResponseDir.TabIndex = 1;
             this.textBoxResponseDir.TextChanged += new System.EventHandler(this.textBoxResponseDir_TextChanged);
             // 
@@ -102,7 +103,7 @@ namespace RemoteControl.ReactionMonitoring
             this.buttonGetReactions.Name = "buttonGetReactions";
             this.buttonGetReactions.Size = new System.Drawing.Size(273, 23);
             this.buttonGetReactions.TabIndex = 3;
-            this.buttonGetReactions.Text = "Get Reactions";
+            this.buttonGetReactions.Text = "Get Reaction Configs";
             this.buttonGetReactions.UseVisualStyleBackColor = true;
             this.buttonGetReactions.Click += new System.EventHandler(this.buttonGetReactions_Click);
             // 
@@ -122,49 +123,19 @@ namespace RemoteControl.ReactionMonitoring
             this.comboBoxReaction.FormattingEnabled = true;
             this.comboBoxReaction.Location = new System.Drawing.Point(16, 235);
             this.comboBoxReaction.Name = "comboBoxReaction";
-            this.comboBoxReaction.Size = new System.Drawing.Size(381, 21);
+            this.comboBoxReaction.Size = new System.Drawing.Size(497, 21);
             this.comboBoxReaction.TabIndex = 4;
             this.comboBoxReaction.SelectedIndexChanged += new System.EventHandler(this.comboBoxReaction_SelectedIndexChanged);
             // 
-            // buttonStart
-            // 
-            this.buttonStart.Location = new System.Drawing.Point(124, 308);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(64, 64);
-            this.buttonStart.TabIndex = 5;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
-            // 
             // buttonStop
             // 
+            this.buttonStop.Image = global::RemoteControl.Panorama.Properties.Resources.Stop;
             this.buttonStop.Location = new System.Drawing.Point(334, 308);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(64, 64);
             this.buttonStop.TabIndex = 8;
-            this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
-            // 
-            // buttonPause
-            // 
-            this.buttonPause.Location = new System.Drawing.Point(194, 308);
-            this.buttonPause.Name = "buttonPause";
-            this.buttonPause.Size = new System.Drawing.Size(64, 64);
-            this.buttonPause.TabIndex = 6;
-            this.buttonPause.Text = "Pause";
-            this.buttonPause.UseVisualStyleBackColor = true;
-            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
-            // 
-            // buttonResume
-            // 
-            this.buttonResume.Location = new System.Drawing.Point(264, 308);
-            this.buttonResume.Name = "buttonResume";
-            this.buttonResume.Size = new System.Drawing.Size(64, 64);
-            this.buttonResume.TabIndex = 7;
-            this.buttonResume.Text = "Resume";
-            this.buttonResume.UseVisualStyleBackColor = true;
-            this.buttonResume.Click += new System.EventHandler(this.buttonResume_Click);
             // 
             // textBoxResponseLog
             // 
@@ -177,7 +148,7 @@ namespace RemoteControl.ReactionMonitoring
             this.textBoxResponseLog.Name = "textBoxResponseLog";
             this.textBoxResponseLog.ReadOnly = true;
             this.textBoxResponseLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxResponseLog.Size = new System.Drawing.Size(381, 114);
+            this.textBoxResponseLog.Size = new System.Drawing.Size(497, 126);
             this.textBoxResponseLog.TabIndex = 9;
             this.textBoxResponseLog.TextChanged += new System.EventHandler(this.textBoxResponseLog_TextChanged);
             // 
@@ -215,13 +186,13 @@ namespace RemoteControl.ReactionMonitoring
             0,
             -2147483648});
             this.numericUpDownTimeout.Name = "numericUpDownTimeout";
-            this.numericUpDownTimeout.Size = new System.Drawing.Size(805, 20);
+            this.numericUpDownTimeout.Size = new System.Drawing.Size(1037, 20);
             this.numericUpDownTimeout.TabIndex = 2;
             // 
             // buttonBrowseCommandDir
             // 
             this.buttonBrowseCommandDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowseCommandDir.Location = new System.Drawing.Point(378, 29);
+            this.buttonBrowseCommandDir.Location = new System.Drawing.Point(493, 28);
             this.buttonBrowseCommandDir.Name = "buttonBrowseCommandDir";
             this.buttonBrowseCommandDir.Size = new System.Drawing.Size(20, 20);
             this.buttonBrowseCommandDir.TabIndex = 11;
@@ -232,7 +203,7 @@ namespace RemoteControl.ReactionMonitoring
             // buttonBrowseResponseDir
             // 
             this.buttonBrowseResponseDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBrowseResponseDir.Location = new System.Drawing.Point(377, 70);
+            this.buttonBrowseResponseDir.Location = new System.Drawing.Point(493, 70);
             this.buttonBrowseResponseDir.Name = "buttonBrowseResponseDir";
             this.buttonBrowseResponseDir.Size = new System.Drawing.Size(20, 20);
             this.buttonBrowseResponseDir.TabIndex = 12;
@@ -246,7 +217,7 @@ namespace RemoteControl.ReactionMonitoring
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonInit.Location = new System.Drawing.Point(17, 139);
             this.buttonInit.Name = "buttonInit";
-            this.buttonInit.Size = new System.Drawing.Size(804, 23);
+            this.buttonInit.Size = new System.Drawing.Size(1036, 23);
             this.buttonInit.TabIndex = 13;
             this.buttonInit.Text = "Initialize";
             this.buttonInit.UseVisualStyleBackColor = true;
@@ -268,7 +239,7 @@ namespace RemoteControl.ReactionMonitoring
             0,
             -2147483648});
             this.numericUpDownCommandTimeout.Name = "numericUpDownCommandTimeout";
-            this.numericUpDownCommandTimeout.Size = new System.Drawing.Size(381, 20);
+            this.numericUpDownCommandTimeout.Size = new System.Drawing.Size(497, 20);
             this.numericUpDownCommandTimeout.TabIndex = 14;
             // 
             // labelCommandTimeout
@@ -283,7 +254,7 @@ namespace RemoteControl.ReactionMonitoring
             // buttonAuxDir
             // 
             this.buttonAuxDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAuxDir.Location = new System.Drawing.Point(798, 29);
+            this.buttonAuxDir.Location = new System.Drawing.Point(1030, 29);
             this.buttonAuxDir.Name = "buttonAuxDir";
             this.buttonAuxDir.Size = new System.Drawing.Size(20, 20);
             this.buttonAuxDir.TabIndex = 18;
@@ -294,16 +265,16 @@ namespace RemoteControl.ReactionMonitoring
             // textBoxAuxDir
             // 
             this.textBoxAuxDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAuxDir.Location = new System.Drawing.Point(436, 29);
+            this.textBoxAuxDir.Location = new System.Drawing.Point(548, 29);
             this.textBoxAuxDir.Name = "textBoxAuxDir";
-            this.textBoxAuxDir.Size = new System.Drawing.Size(356, 20);
+            this.textBoxAuxDir.Size = new System.Drawing.Size(476, 20);
             this.textBoxAuxDir.TabIndex = 16;
             // 
             // labelAuxDir
             // 
             this.labelAuxDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAuxDir.AutoSize = true;
-            this.labelAuxDir.Location = new System.Drawing.Point(433, 13);
+            this.labelAuxDir.Location = new System.Drawing.Point(545, 13);
             this.labelAuxDir.Name = "labelAuxDir";
             this.labelAuxDir.Size = new System.Drawing.Size(178, 13);
             this.labelAuxDir.TabIndex = 17;
@@ -313,31 +284,61 @@ namespace RemoteControl.ReactionMonitoring
             // 
             this.labelAuxChannel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAuxChannel.AutoSize = true;
-            this.labelAuxChannel.Location = new System.Drawing.Point(434, 366);
+            this.labelAuxChannel.Location = new System.Drawing.Point(545, 366);
             this.labelAuxChannel.Name = "labelAuxChannel";
-            this.labelAuxChannel.Size = new System.Drawing.Size(121, 13);
+            this.labelAuxChannel.Size = new System.Drawing.Size(141, 13);
             this.labelAuxChannel.TabIndex = 20;
-            this.labelAuxChannel.Text = "Aux Channel Response:";
+            this.labelAuxChannel.Text = "Auxillary Channel Response:";
             // 
             // textBoxAuxLog
             // 
             this.textBoxAuxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAuxLog.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAuxLog.Location = new System.Drawing.Point(436, 382);
+            this.textBoxAuxLog.Location = new System.Drawing.Point(548, 382);
             this.textBoxAuxLog.Multiline = true;
             this.textBoxAuxLog.Name = "textBoxAuxLog";
             this.textBoxAuxLog.ReadOnly = true;
             this.textBoxAuxLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxAuxLog.Size = new System.Drawing.Size(381, 114);
+            this.textBoxAuxLog.Size = new System.Drawing.Size(501, 126);
             this.textBoxAuxLog.TabIndex = 19;
             this.textBoxAuxLog.TextChanged += new System.EventHandler(this.textBoxAuxLog_TextChanged);
+            // 
+            // buttonResume
+            // 
+            this.buttonResume.Image = global::RemoteControl.Panorama.Properties.Resources.Resume;
+            this.buttonResume.Location = new System.Drawing.Point(264, 308);
+            this.buttonResume.Name = "buttonResume";
+            this.buttonResume.Size = new System.Drawing.Size(64, 64);
+            this.buttonResume.TabIndex = 7;
+            this.buttonResume.UseVisualStyleBackColor = true;
+            this.buttonResume.Click += new System.EventHandler(this.buttonResume_Click);
+            // 
+            // buttonPause
+            // 
+            this.buttonPause.Image = global::RemoteControl.Panorama.Properties.Resources.Pause;
+            this.buttonPause.Location = new System.Drawing.Point(194, 308);
+            this.buttonPause.Name = "buttonPause";
+            this.buttonPause.Size = new System.Drawing.Size(64, 64);
+            this.buttonPause.TabIndex = 6;
+            this.buttonPause.UseVisualStyleBackColor = true;
+            this.buttonPause.Click += new System.EventHandler(this.buttonPause_Click);
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Image = global::RemoteControl.Panorama.Properties.Resources.Start;
+            this.buttonStart.Location = new System.Drawing.Point(124, 308);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(64, 64);
+            this.buttonStart.TabIndex = 5;
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 508);
+            this.ClientSize = new System.Drawing.Size(1065, 520);
             this.Controls.Add(this.labelAuxChannel);
             this.Controls.Add(this.textBoxAuxLog);
             this.Controls.Add(this.buttonAuxDir);
@@ -363,9 +364,10 @@ namespace RemoteControl.ReactionMonitoring
             this.Controls.Add(this.textBoxCmdDir);
             this.Controls.Add(this.labelResponseDir);
             this.Controls.Add(this.labelCmdDir);
-            this.MinimumSize = new System.Drawing.Size(849, 547);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(1081, 559);
             this.Name = "MainForm";
-            this.Text = "Remote Control Reaction Monitoring";
+            this.Text = "Remote Control Panorama";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCommandTimeout)).EndInit();
             this.ResumeLayout(false);
