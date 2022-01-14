@@ -1,3 +1,4 @@
+using System.IO;
 using LC.Communicator;
 using LC.Communicator.ByFile;
 using LC.Communicator.ByFile.Structures;

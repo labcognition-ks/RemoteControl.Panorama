@@ -13,15 +13,44 @@ All rights reserved.
 
 # Version History
 ## 0.1.0
-This is the initial version of the remote control.
+This is the initial official version of the remote control.
 It is working with the following software:
 
 | Software Name     | Version (internal Version) |
 |-------------------|----------------------------|
+| Panorama Family   | 7.1.0 or higher            |
+
+# Requirements
+
+## Product License
+Using the reaction monitoring module and remote control requires a valid license
+of the software and the reaction monitoring add-on module.
+
+The auxiallary channel messaging requires a valid license of the software and
+potentially the add-on module messaging needs to be monitored for.
+
+## Software Development
+LabCognition software is a C# .NET application.
+However, since there is no direct integration, linking or referencing of
+software components required, the third party application may be programmed in
+any other language.
+
+# Prerequisites
+The feature(s) must be activated and configured in the LabCognition software prior
+to using it from your third party application.
 
 # Functional Overview
-A third party application may send commands to LabCognition software's reaction
-monitoring module to remote control a particular reaction run.
+A third party application may send commands to LabCognition software's to remote
+control it.
+
+In addition, the LabCognition software might send information to configured
+channels in torder to inform third party applications on ee.g. particular events
+or operation progress.
+
+The demo application shows two main topics of communication:
+
+## Reaction Monitoring Module 
+This feature allows to remote control a particular reaction run.
 
 The LabCognition software must be started to ensure commands are accepted.
 
@@ -34,9 +63,25 @@ the reaction run window (Start, Stop, Pause, Resume).
 In addition, available reaction runs registered within the software can be read
 out programmatically.
 
-Communication is bi-directional, whereby the third party software may send
-commands and receives responses accordingly.
+Communication is bi-directional, whereby the third party software (in this case
+this demo) may send commands and receives responses accordingly.
 
+## Receive Information through Auxiallary Channel
+Another feature allows to pick up messages sent by the software into an
+auxillary channel.
+
+This feature is independent of the Reaction Monitoring Module control described
+above.
+
+The listener monitors a particular directory for incoming Json files.
+
+**NOTE: Mostly instrument modules of the software send messages into auxiallary
+channels. 
+In case you require a particular output from LabCognition software to support
+your application, please contact support@labcognition.com with your request.**
+
+
+# Remote Control Reaction Monitoring
 ## Sending Commands and receiving Responses
 The desired command is sent by dropping a *.Json file into the configured
 command directory.
@@ -133,22 +178,6 @@ An Example Nlog.Config file is the following:
 The response file includes errors and warnings in the same way as the NLog log
 file (see below).
 
-# Requirements
-
-## Product License
-Using the reaction monitoring module and remote control requires a valid license
-of the software and the reaction monitoring add-on module.
-
-## Software Development
-LabCognition software is a C# .NET application.
-However, since there is no direct integration, linking or referencing of
-software components required, the third party application may be programmed in
-any other language.
-
-# Prerequisites
-Remote control must be configured in the LabCognition software prior to using it
-from your third party application.
-
 ## Modify *App.Exe.Config* File
 Remote control configuration is done in the LabCognition software's
 *App.Exe.Config* file.
@@ -202,7 +231,6 @@ user interaction:
   your application
 - Make sure to clean up the response directory
 
-# Third Party Software Development
 ## Commands
 Command file may have parameters to specify the reaction run settings.
 
@@ -404,3 +432,89 @@ command is processed but nothing happens and a warning is returned.**
         "Message" = null
     }
     `
+# Messages in Auxillary Channel
+
+## Modify *App.Exe.Config* File
+The auxillary channel must be activated by enabling the corresponding keys in
+the LabCognition software's *App.Exe.Config* file.
+
+It is located in the installation directory of the LabCognition software.
+(*App* must be replaced by the software executable name, e.g.
+*Panorama.exe.config*!)
+
+- Open the *App.Exe.Config* with a text editor in Administrator mode
+
+    **NOTE: You must be an administrator to modify files in the installation
+    directory!**
+
+- Add the following keys aywhere in the *Configuration* section:
+
+      <add key="XYZAuxillaryChannelDirectory" value="c:\myPath\Auxillary"/>
+
+      <add key="XYZAuxillaryChannelCommunicationTimeout" value="1000"/>
+
+**NOTE: The above key names are examples!
+Please ask LabCognition support for the most recent list of supported
+channels.**
+
+## Development
+Create an instance of the *Receiver* class and setup *ReceiverParameter*.
+
+**NOTE: The exchanged object type must be implemented on both, the client and the
+server side in the same way!**
+
+**NOTE: When sending a list of parameters or objects, you may use the IContent
+interface for the transfer.
+LabCognition software will always send a *IResponse\<IContent\[\]\>* object**
+
+Call the *Start* method to start monitoring.
+
+Register the *OnFileCreated* event handler and implement the dispatcher for
+incoming messages.
+
+To stop serving, call the *Stop* method.
+
+## Example
+Assuming the LabCognition software controls a spectrometer for spectrum
+measurement, but a third party software controls the light source to be operated
+with the spectrometer.
+
+In this case, the third party software needs to know, when to turn on and off
+the light source before and after spectrum measurement.
+
+In assition, it might be necessary to know, which power to set the light source
+to when being turned on.
+
+LabCognition software is sending such "trigger" to the third party software
+through the auxillary channel of its instrument module.
+
+**NOTE: Such feature must be implemented on LabCognition software side!
+In case you require a particular output from LabCognition software to support
+your application, please contact support@labcognition.com with your request.**
+
+Whenever the light source must be turned on or off, the trigger is sent as Json file as follows:
+
+***Example 'Laser.json'***
+
+    {
+        "Result":[
+                    {
+                        "Name":"TurnedOn",
+                        "ValueType":"System.Boolean",
+                        "Value":"True"
+                    },
+                    {
+                        "Name":"LaserPower_Percent",
+                        "ValueType":"System.Single",
+                        "Value":"1"
+                    },
+                    {
+                        "Name":"LaserTurnOnWarmupDelay_Seconds",
+                        "ValueType":"System.Int32","Value":"1"}
+                ],
+        "MessageType":"Info",
+        "Message":null
+    }
+
+The message is always a *IResponse\<IContent\[\]\>* Json object. 
+The number of *Content* parameters may vary according to the context.
