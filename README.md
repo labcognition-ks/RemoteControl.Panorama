@@ -95,8 +95,9 @@ The following commands are supported (see below for details):
 - Resume
 - Stop
 
-The command file content may be empty or include parameters as Json objects such
-as the file path of the reaction run the command shall be applied (see below).
+The command file content must include a parameter object as Json object (or
+*null*) such as the file path of the reaction run the command shall be applied
+(see below).
 
 The LabCognition software will automatically delete the command file after the
 command has been interpreted.
@@ -273,7 +274,10 @@ Monitoring->Run Reaction* sub-menu.
 
 #### Command File
 - Filename = GetReactions.json
-- Content = \<empty\>
+- Content = *null*
+
+**NOTE: Since there are no parameters with this command, the valid Json object
+must be *null*!**
 
 #### Response File
 - Filename = GetReactions.json
