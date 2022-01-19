@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="LC.Communicator.ByFile" Version="0.2.0" />
+      <PackageReference Include="LC.Communicator.ByFile" Version="0.2.1" />
     </ItemGroup>
 
     <ItemGroup>
